@@ -113,7 +113,9 @@ class GSUtil(object):
                     os.remove(manifest_log)
                     os.remove(gsutil_output)
                     return manifestobjects
+                else:
+                    logging.warning("gsutil failed. See {} for details".format(gsutil_output))
             except Exception as e:
-                logging.debug("Exception encountered: {} / {}"
+                logging.warning("Exception encountered: {} / {}"
                               .format(type(e), str(e)))
         raise IOError('gsutil failed. Max attempts ({}) exceeded'.format(max_retries))
